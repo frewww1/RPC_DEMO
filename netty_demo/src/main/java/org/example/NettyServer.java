@@ -4,6 +4,7 @@ import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.ServerSocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 public class NettyServer {
@@ -22,13 +23,6 @@ public class NettyServer {
         try {
             ServerBootstrap bootstrap = new ServerBootstrap().group(boss, work);
             bootstrap.channel(NioServerSocketChannel.class)
-                    //这个处理器可以不写
-                    .handler(new ChannelInitializer<ServerSocketChannel>() {
-                        @Override
-                        protected void initChannel(ServerSocketChannel ch) throws Exception {
-                            System.out.println("服务正在启动中......");
-                        }
-                    })
                     //业务处理
                     .childHandler(NettyServerChannelInitializer.INSTANCE);
 
