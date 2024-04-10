@@ -9,8 +9,8 @@
     <module>Serialize_demo</module>
       <module>Zookeeper_demo</module>
       <module>RPC</module>
-      <module>RPC_demo</module>
-      <module>RPC_demo2</module>
+      <module>RPC_Client_Demo</module>
+      <module>RPC_Server_Demo</module>
   </modules>
   <packaging>pom</packaging>
 

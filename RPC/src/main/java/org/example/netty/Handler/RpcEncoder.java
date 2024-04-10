@@ -1,9 +1,10 @@
-package org.example.netty;
+package org.example.netty.Handler;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 import org.example.Factory;
+import org.example.netty.Pojo.RpcMessage;
 
 public class RpcEncoder extends MessageToByteEncoder<RpcMessage> {
     @Override

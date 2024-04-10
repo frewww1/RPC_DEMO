@@ -1,7 +1,7 @@
 package org.example.loadbalance;
 
 
-import org.example.netty.RpcRequest;
+import org.example.netty.Pojo.RpcRequest;
 
 import java.util.List;
 

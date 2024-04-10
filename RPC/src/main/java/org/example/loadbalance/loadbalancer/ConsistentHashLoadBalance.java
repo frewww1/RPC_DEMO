@@ -3,7 +3,7 @@ package org.example.loadbalance.loadbalancer;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.loadbalance.AbstractLoadBalance;
-import org.example.netty.RpcRequest;
+import org.example.netty.Pojo.RpcRequest;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

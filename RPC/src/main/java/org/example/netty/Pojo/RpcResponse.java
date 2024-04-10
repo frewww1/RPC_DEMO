@@ -1,4 +1,4 @@
-package org.example.netty;
+package org.example.netty.Pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

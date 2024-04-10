@@ -2,6 +2,8 @@ package org.example.netty;
 
 import lombok.SneakyThrows;
 import org.example.RpcEnum;
+import org.example.netty.Pojo.RpcRequest;
+import org.example.netty.Pojo.RpcResponse;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;

@@ -7,10 +7,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>RPC_demo</artifactId>
+    <artifactId>RPC_Client_Demo</artifactId>
     <packaging>jar</packaging>
 
-    <name>RPC_demo</name>
+    <name>RPC_Client_Demo</name>
     <url>http://maven.apache.org</url>
 
     <properties>

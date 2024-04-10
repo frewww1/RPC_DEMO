@@ -2,7 +2,7 @@ package org.example.loadbalance.loadbalancer;
 
 
 import org.example.loadbalance.AbstractLoadBalance;
-import org.example.netty.RpcRequest;
+import org.example.netty.Pojo.RpcRequest;
 
 import java.util.List;
 import java.util.Random;

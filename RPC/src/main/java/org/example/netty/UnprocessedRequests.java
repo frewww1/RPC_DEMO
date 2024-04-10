@@ -1,7 +1,8 @@
 package org.example.netty;
 
 import lombok.SneakyThrows;
-import org.omg.CORBA.PUBLIC_MEMBER;
+import org.example.netty.Pojo.RpcRequest;
+import org.example.netty.Pojo.RpcResponse;
 
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;

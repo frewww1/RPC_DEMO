@@ -36,7 +36,13 @@ public class MyServer {
     }
     public ChannelFuture start(){
         ChannelFuture channelFuture = serverBootstrap.bind();
-
+        channelFuture.addListener((future) -> {
+            System.out.println(channelFuture.channel().remoteAddress().toString());
+            if (channelFuture.isSuccess()) {
+                System.out.println("监听端口成功");
+            } else {
+                System.out.println("监听端口失败");
+            }});
 //        channelFuture.addListener(new ChannelFutureListener() {
 //            @Override
 //            public void operationComplete(ChannelFuture channelFuture) throws Exception {
