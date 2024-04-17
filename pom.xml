@@ -7,10 +7,12 @@
   <version>1.0-SNAPSHOT</version>
   <modules>
     <module>Serialize_demo</module>
-      <module>Zookeeper_demo</module>
-      <module>RPC</module>
-      <module>RPC_Client_Demo</module>
-      <module>RPC_Server_Demo</module>
+    <module>Zookeeper_demo</module>
+    <module>RPC</module>
+    <module>RPC_Client_Demo</module>
+    <module>RPC_Server_Demo</module>
+    <module>Thread_demo</module>
+
   </modules>
   <packaging>pom</packaging>
 
