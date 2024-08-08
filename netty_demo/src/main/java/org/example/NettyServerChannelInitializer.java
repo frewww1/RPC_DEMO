@@ -15,8 +15,7 @@ public class NettyServerChannelInitializer extends ChannelInitializer<NioSocketC
 
     public static final NettyServerChannelInitializer INSTANCE = new NettyServerChannelInitializer();
 
-//NioSocketChannel，异步的客户端TCP Socket连接
-
+    //NioSocketChannel，异步的客户端TCP Socket连接
     @Override
     protected void initChannel(NioSocketChannel ch) throws Exception {
         ch.pipeline()

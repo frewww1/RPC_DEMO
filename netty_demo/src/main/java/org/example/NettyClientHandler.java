@@ -9,7 +9,7 @@ import org.example.test.MyClient;
 import java.net.InetSocketAddress;
 import java.util.concurrent.TimeUnit;
 
-
+//处理输入信息
 public class  NettyClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
@@ -17,7 +17,6 @@ public class  NettyClientHandler extends ChannelInboundHandlerAdapter {
         System.out.println(msg);
         if (msg.toString()=="ping"){
             System.out.println("发送pong");
-
             ctx.channel().writeAndFlush("pong");
         }
     }
@@ -25,17 +24,21 @@ public class  NettyClientHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("连接激活 == " + ctx.channel().remoteAddress().toString());
+
     }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("断线了......" + ctx.channel().remoteAddress().toString());
-        ctx.channel().eventLoop().schedule(() -> {
-            System.out.println("断线重连......");
-            //重连
-
-            MyClient.start((InetSocketAddress)ctx.channel().remoteAddress());
-        }, 3L, TimeUnit.SECONDS);
+        if(!ctx.channel().isOpen()){
+            System.out.println("通道关闭了");
+        }else{
+            System.out.println("断线了......" + ctx.channel().remoteAddress().toString());
+            ctx.channel().eventLoop().schedule(() -> {
+                System.out.println("断线重连......");
+                //重连
+                MyClient.start((InetSocketAddress)ctx.channel().remoteAddress());
+            }, 3L, TimeUnit.SECONDS);
+        }
     }
 
     /**
@@ -66,6 +69,7 @@ public class  NettyClientHandler extends ChannelInboundHandlerAdapter {
         cause.printStackTrace();
         ctx.close();
     }
+
 }
 
 

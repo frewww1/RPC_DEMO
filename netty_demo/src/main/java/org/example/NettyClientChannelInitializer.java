@@ -13,6 +13,7 @@ public class NettyClientChannelInitializer extends ChannelInitializer<NioSocketC
     protected void initChannel(NioSocketChannel ch) throws Exception {
         ch.pipeline()
                 //空闲状态的处理器
+                .addLast(new NettyOutClientHandler())
                 .addLast(new IdleStateHandler(30, 0, 0, TimeUnit.SECONDS))
                 .addLast(new ObjectEncoder())
                 .addLast(new ObjectDecoder((s) -> {

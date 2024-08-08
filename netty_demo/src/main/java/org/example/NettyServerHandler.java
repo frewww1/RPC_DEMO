@@ -15,19 +15,15 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("channelActive:有新连接加入了++++......" + ctx.channel().remoteAddress().toString());
-
         super.channelActive(ctx);
     }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         try {
-
             System.out.println("接收到的信息：" + msg);
-
-            if (msg.toString()=="ping"){
+            if ("ping".equals(msg.toString())){
                 System.out.println("发送pong");
-
                 ctx.channel().writeAndFlush("pong");
             }
             else{
@@ -45,8 +41,6 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
         if (evt instanceof IdleStateEvent) {
             IdleStateEvent event = (IdleStateEvent) evt;
             System.out.println(((IdleStateEvent) event).state() + ">>>" + ctx.channel().id());
-
-
             if (event.state().equals(IdleState.READER_IDLE)){
                 // 心跳包丢失，10秒没有收到客户端心跳 (断开连接)
                 System.out.println("发送ping");

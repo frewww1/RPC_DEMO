@@ -23,7 +23,10 @@ import java.util.concurrent.TimeUnit;
 public class MyServer {
     private int port = 9999;
     private ServerBootstrap serverBootstrap = initBootstrap();
-    private MyServer SingleBean;
+//    单例模式
+    private static final MyServer SingleBean = new MyServer();
+
+    private MyServer(){}
 
     private ServerBootstrap initBootstrap(){
         NioEventLoopGroup group = new NioEventLoopGroup();
@@ -34,15 +37,22 @@ public class MyServer {
                 .childHandler(NettyServerChannelInitializer.INSTANCE);
         return serverBootstrap;
     }
+//    监听并接收消息
     public ChannelFuture start(){
         ChannelFuture channelFuture = serverBootstrap.bind();
         channelFuture.addListener((future) -> {
-            System.out.println(channelFuture.channel().remoteAddress().toString());
-            if (channelFuture.isSuccess()) {
-                System.out.println("监听端口成功");
-            } else {
-                System.out.println("监听端口失败");
-            }});
+            try{
+                System.out.println(channelFuture.channel().remoteAddress().toString());
+                if (channelFuture.isSuccess()) {
+                    System.out.println("监听端口成功");
+                } else {
+                    System.out.println("监听端口失败");
+                }
+            }catch (Exception e){
+                // 处理异常，例如记录日志
+                e.printStackTrace();
+            }
+            });
 //        channelFuture.addListener(new ChannelFutureListener() {
 //            @Override
 //            public void operationComplete(ChannelFuture channelFuture) throws Exception {
@@ -51,21 +61,17 @@ public class MyServer {
 //                }
 //            }
 //        });
-
         return channelFuture;
     }
 
+    public static MyServer getSingleBean(){
+        return SingleBean;
+    }
     public static void main(String[] args) {
-        MyServer myServer = new MyServer();
+//        MyServer myServer = new MyServer();
+//        使用单例模式
+        MyServer myServer = MyServer.getSingleBean();
         myServer.start();
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                // 模拟业务执行
-//                System.out.println("正在执行业务...");
-
-            }
-        }, 0, 5 * 1000);
+        System.out.println("监听开始!");
     }
 }
