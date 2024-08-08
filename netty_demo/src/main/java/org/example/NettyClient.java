@@ -19,8 +19,6 @@ public class NettyClient {
     private static Bootstrap bootstrap = new Bootstrap();
 
     public static void main(String[] args) throws InterruptedException {
-
-
         try {
             NioEventLoopGroup group = new NioEventLoopGroup(8);
             bootstrap.group(group)

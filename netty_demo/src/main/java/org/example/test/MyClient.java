@@ -15,14 +15,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.NettyClientChannelInitializer;
 
 import java.net.InetSocketAddress;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @NoArgsConstructor
 public class MyClient {
-
-
-
     private static Bootstrap bootstrap = getBootstrap();
     private static Bootstrap getBootstrap(){
         NioEventLoopGroup group = new NioEventLoopGroup();
@@ -34,6 +32,7 @@ public class MyClient {
 
     public static ChannelFuture start(InetSocketAddress inetSocketAddress){
         ChannelFuture channelFuture = bootstrap.connect(inetSocketAddress);
+
 //        channelFuture.addListener(new ChannelFutureListener() {
 //            @Override
 //            public void operationComplete(ChannelFuture channelFuture) throws Exception {
@@ -44,15 +43,28 @@ public class MyClient {
     }
 
     @SneakyThrows
-    public void send(){
-        InetSocketAddress inetSocketAddress = new InetSocketAddress("127.0.0.1",9999);
-        ChannelFuture channelFuture = start(inetSocketAddress).sync();
-        channelFuture.channel().writeAndFlush("我是客户端").sync();
-
+    public void send(ChannelFuture channelFuture){
+        ChannelFuture channelFutureSend = channelFuture.sync();
+        channelFutureSend.channel().writeAndFlush("我是客户端").sync();
+    }
+    @SneakyThrows
+    public void send(ChannelFuture channelFuture,String message){
+        channelFuture.channel().writeAndFlush(message).sync();
     }
 
     public static void main(String[] args) {
         MyClient myClient = new MyClient();
-        myClient.send();
+        InetSocketAddress inetSocketAddress = new InetSocketAddress("127.0.0.1",9999);
+        ChannelFuture channelFuture = myClient.start(inetSocketAddress);
+        myClient.send(channelFuture);
+        Scanner scanner = new Scanner(System.in);
+        while(true){
+            String message = scanner.next();
+            myClient.send(channelFuture,message);
+            if ("stop".equals(message)){
+                break;
+            }
+        }
+        System.out.println("通信结束");
     }
 }
